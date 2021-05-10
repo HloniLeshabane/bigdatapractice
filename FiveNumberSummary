@@ -1,0 +1,42 @@
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <iterator>
+#include <vector>
+
+using namespace std;
+
+int main(void)
+{
+    auto v = std::vector<float>{ 1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f};
+
+    auto median = [&](vector<float>::iterator start, vector<float>::iterator end) float {
+        
+        if((end-start) % 2 == 0) {
+            auto n = (end - start) / 2;
+            auto n_before = n - 1 + (start-v.begin());
+            auto n_after = n + (start-v.begin());
+
+            return (v[n_before] + v[n_after]) / 2.0f;
+        } else {
+            
+            auto n = float(end-start) / 2.f;
+            return v[floor(n)];
+        }
+    };
+
+    std::sort(v.begin(), v.end());
+
+    for(auto& i : v) {
+        std::cout << i << " ";
+    }
+    cout << "\n";
+    
+    //cout<<median(v.begin(),v.end())<<"\n"; //q2
+    //cout<<median(v.begin() + v.size()/2 + 1,v.end())<<"\n"; //q3 for odd
+    //cout<<median(v.begin(),v.begin() + v.size()/2 )<<"\n"; //q1 for odd
+    //cout<<median(v.begin(),v.begin() + v.size()/2  )<<"\n"; //q1 for even
+    //cout<<median(v.begin() + v.size()/2 ,v.end())<<"\n"; //q3 for even
+
+    return 0;
+}
